@@ -1,15 +1,17 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.domain;
 
-public class CreditCard {
+import java.time.LocalDateTime;
+
+public class VisaCard {
     public String address;
     public String cardNumber;
-    public String createdDate;
+    public LocalDateTime  createdDate;
     public String expireDate;
     public String firstName;
-    public long id;
+    public Long id;
     public String lastName;
     public String phoneNumber;
-    public String updatedDate;
+    public LocalDateTime  updateDate;
 
     public String getAddress() {
         return address;
@@ -27,11 +29,11 @@ public class CreditCard {
         this.cardNumber = cardNumber;
     }
 
-    public String getCreatedDate() {
+    public LocalDateTime  getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(LocalDateTime  createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -75,12 +77,12 @@ public class CreditCard {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUpdatedDate() {
-        return updatedDate;
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setUpdatedDate(LocalDateTime  updatedDate) {
+        this.updateDate = updatedDate;
     }
 
 }
