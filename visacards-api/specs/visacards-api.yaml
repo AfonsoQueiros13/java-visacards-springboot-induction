@@ -1,0 +1,218 @@
+swagger: '2.0'
+info:
+  description: Credit Card REST API.
+  version: API V1
+  title: Learn Unit Spring Boot
+  contact:
+    name: Carlos Seabra
+    email: carlos.seabra@criticalsoftware.com
+host: 'localhost:8080'
+basePath: /
+tags:
+  - name: Visa Electron Controller
+    description: Credit Card API
+paths:
+  /api/v1/learning/visa/electron/:
+    post:
+      tags:
+        - Visa Electron Controller
+      summary: Create Visa Electron Card Operation
+      operationId: createCardUsingPOST
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: creditCardCreateDto
+          description: creditCardCreateDto
+          required: true
+          schema:
+            $ref: '#/definitions/CreditCardCreateDto'
+      responses:
+        '201':
+          description: Successfully credit card creation
+          schema:
+            $ref: '#/definitions/CreditCardGetDto'
+        '400':
+          description: Invalid attribute on the payload
+        '422':
+          description: The credit card cardNumber is already on the database
+      deprecated: false
+  '/api/v1/learning/visa/electron/{id}':
+    get:
+      tags:
+        - Visa Electron Controller
+      summary: Get Visa Electron Card information
+      operationId: getCardUsingGET
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successfully response with credit card details
+          schema:
+            $ref: '#/definitions/CreditCardGetDto'
+        '404':
+          description: Resource not found
+      deprecated: false
+    put:
+      tags:
+        - Visa Electron Controller
+      summary: Edit Visa Electron Card
+      operationId: editCardUsingPUT
+      consumes:
+        - application/json;charset=UTF-8
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - in: body
+          name: creditCardEditableAttsDto
+          description: creditCardEditableAttsDto
+          required: true
+          schema:
+            $ref: '#/definitions/CreditCardEditableAttsDto'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successfully credit card edition
+          schema:
+            $ref: '#/definitions/CreditCardGetDto'
+        '404':
+          description: Resource not found
+      deprecated: false
+    delete:
+      tags:
+        - Visa Electron Controller
+      summary: Delete Visa Electron Card
+      operationId: deleteCardUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Successfully credit card deletion
+        '404':
+          description: Resource not found
+      deprecated: false
+definitions:
+  CreditCardCreateDto:
+    type: object
+    required:
+      - cardNumber
+      - cvv
+      - expireDate
+      - firstName
+      - lastName
+    properties:
+      address:
+        type: string
+        example: 'Parque Industrial de Taveiro Lote 49, 3045-504'
+        description: Address of credit card owner
+      cardNumber:
+        type: string
+        example: 4913659656615151
+        description: VISA Electron card number
+      cvv:
+        type: string
+        example: 435
+        description: Credit card cardNumber CVV
+      expireDate:
+        type: string
+        example: 12/2018
+        description: Credit card expiration date String (MM/YYYY)
+      firstName:
+        type: string
+        example: Carlos
+        description: First name of the owner of the credit card
+      lastName:
+        type: string
+        example: Seabra
+        description: Last name of the owner of the credit card
+      phoneNumber:
+        type: string
+        example: '+35191916004323'
+        description: Phone cardNumber of credit card owner
+    title: CreditCardCreateDto
+  CreditCardEditableAttsDto:
+    type: object
+    required:
+      - lastName
+    properties:
+      address:
+        type: string
+        example: 'Parque Industrial de Taveiro Lote 49, 3045-504'
+        description: Address of credit card owner
+      lastName:
+        type: string
+        example: Seabra
+        description: Last name of the owner of the credit card
+      phoneNumber:
+        type: string
+        example: '+35191916004323'
+        description: Phone cardNumber of credit card owner
+    title: CreditCardEditableAttsDto
+  CreditCardGetDto:
+    type: object
+    required:
+      - cardNumber
+      - createdDate
+      - expireDate
+      - firstName
+      - lastName
+    properties:
+      address:
+        type: string
+        example: 'Parque Industrial de Taveiro Lote 49, 3045-504'
+        description: Address of credit card owner
+      cardNumber:
+        type: string
+        example: 4913659656615151
+        description: VISA Electron card number
+      createdDate:
+        type: string
+        example: '2018-12-06 12:00:28'
+        description: Credit card creation date
+      expireDate:
+        type: string
+        example: 12/2018
+        description: Credit card expiration date String (MM/YYYY)
+      firstName:
+        type: string
+        example: Carlos
+        description: First name of the owner of the credit card
+      id:
+        type: integer
+        format: int64
+        example: 100
+        description: The database generated credit card ID
+      lastName:
+        type: string
+        example: Seabra
+        description: Last name of the owner of the credit card
+      phoneNumber:
+        type: string
+        example: '+35191916004323'
+        description: Phone cardNumber of credit card owner
+      updateDate:
+        type: string
+        example: '2018-12-06 14:00:28'
+        description: Credit card last update date
+    title: CreditCardGetDto

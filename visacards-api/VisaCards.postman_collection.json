@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "01f01c13-277c-4f83-a139-8551c2dd1bce",
+		"name": "VisaCards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21116032"
+	},
+	"item": [
+		{
+			"name": "GetVisaCard",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/learning/visa/electron/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"learning",
+						"visa",
+						"electron",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateVisaCard",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/learning/visa/electron/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"learning",
+						"visa",
+						"electron",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateVisaCard",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/learning/visa/electron/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"learning",
+						"visa",
+						"electron",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteVisaCard",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/learning/visa/electron/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"learning",
+						"visa",
+						"electron",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

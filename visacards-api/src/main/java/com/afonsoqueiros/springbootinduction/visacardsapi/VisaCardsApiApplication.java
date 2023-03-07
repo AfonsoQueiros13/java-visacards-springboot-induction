@@ -4,10 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class VisacardsApiApplication {
+public class VisaCardsApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(VisacardsApiApplication.class, args);
+
+		SpringApplication.run(VisaCardsApiApplication.class, args);
 	}
 
 }
