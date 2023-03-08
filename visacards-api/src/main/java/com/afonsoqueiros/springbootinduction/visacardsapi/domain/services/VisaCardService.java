@@ -2,24 +2,20 @@ package com.afonsoqueiros.springbootinduction.visacardsapi.domain.services;
 
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.repository.VisaCardRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-@Component
+//@Component
 public class VisaCardService {
     @Autowired
     private VisaCardRepository visaCardRepository;
 
-    @Autowired
-    public VisaCardService(VisaCardRepository visaCardRepository) {
+    public Optional<VisaCard> findById(Long id){
 
-        this.visaCardRepository = visaCardRepository;
-    }
+        return visaCardRepository.findById(id);
 
-    public VisaCard fingById(Long id){
-        return this.visaCardRepository.fingById(id);
     }
 }

@@ -7,9 +7,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableAutoConfiguration
-@ComponentScan({"api", "repository"})
-@EnableJpaRepositories("repository")
 
 public class VisaCardsApiApplication {
 

@@ -1,13 +1,21 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.time.LocalDateTime;
 
+@Entity
 public class VisaCard {
     public String address;
     public String cardNumber;
     public LocalDateTime  createdDate;
     public String expireDate;
     public String firstName;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public Long id;
     public String lastName;
     public String phoneNumber;
