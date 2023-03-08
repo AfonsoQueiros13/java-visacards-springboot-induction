@@ -3,29 +3,19 @@ package com.afonsoqueiros.springbootinduction.visacardsapi.api;
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.services.VisaCardService;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreditCardCreateDto;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
-@Component
 public class VisaCardsController extends HomeController {
     @Autowired
     private VisaCardService visaCardService;
 
-    @Autowired
-    public VisaCardsController(VisaCardService visaCardService) {
-
-        this.visaCardService = visaCardService;
-    }
-
     @GetMapping(value = "/{id}")
-    public VisaCard getVisaCardInfo(@PathVariable(value = "id") long id){
-
-        return this.visaCardService.fingById(id);
-
+    public Optional<VisaCard> getVisaCardInfo(@PathVariable(value = "id") long id){
+        return this.visaCardService.findById(id);
     }
 
     @PostMapping()
