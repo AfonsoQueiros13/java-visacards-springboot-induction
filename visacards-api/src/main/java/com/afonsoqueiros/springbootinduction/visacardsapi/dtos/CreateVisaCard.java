@@ -1,15 +1,13 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.dtos;
 
-public class CreditCardGetDto {
+public class CreateVisaCard {
     public String address;
     public String cardNumber;
-    public String createdDate;
+    public String cvv;
     public String expireDate;
     public String firstName;
-    public long id;
     public String lastName;
     public String phoneNumber;
-    public String updatedDate;
 
     public String getAddress() {
         return address;
@@ -27,12 +25,12 @@ public class CreditCardGetDto {
         this.cardNumber = cardNumber;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
+    public String getCvv() {
+        return cvv;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 
     public String getExpireDate() {
@@ -51,14 +49,6 @@ public class CreditCardGetDto {
         this.firstName = firstName;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -75,11 +65,4 @@ public class CreditCardGetDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
-    }
 }

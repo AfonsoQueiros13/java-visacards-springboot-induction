@@ -1,6 +1,6 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.dtos;
 
-public class CreditCardEditableAttsDto {
+public class UpdateVisaCard {
     public String address;
     public String lastName;
     public String phoneNumber;

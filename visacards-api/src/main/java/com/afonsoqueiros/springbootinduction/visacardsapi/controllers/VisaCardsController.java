@@ -1,8 +1,8 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.controllers;
 
-import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.services.VisaCardService;
-import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreditCardCreateDto;
+import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
+import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,24 +13,26 @@ public class VisaCardsController extends HomeController {
     @Autowired
     private VisaCardService visaCardService;
 
-    @GetMapping(value = "/{id}")
-    public Optional<VisaCard> getVisaCardInfo(@PathVariable(value = "id") long id){
-        return this.visaCardService.findById(id);
+    @GetMapping(value = "{id}")
+    public Optional<GetVisaCard> getVisaCardInfo(@PathVariable(value = "id") long id){
+        return Optional.ofNullable(this.visaCardService.findById(id));
     }
 
     @PostMapping()
-    public String createVisaCard(@RequestBody CreditCardCreateDto creditCardCreateDto){
-        return "createVisaCard";
+    public Optional<Boolean> createVisaCard(@RequestBody CreateVisaCard createVisaCard){
+
+        return Optional.of(this.visaCardService.createVisaCard(createVisaCard));
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "{id}")
     public String updateVisaCard(@PathVariable(value = "id") long id){
         return "updateVisaCard";
     }
 
-    @DeleteMapping(value = "/{id}")
-    public String deleteVisaCard(@PathVariable(value = "id") long id){
-        return "deleteVisaCard";
+    @DeleteMapping(value = "{id}")
+    public Optional<Boolean> deleteVisaCard(@PathVariable(value = "id") long id){
+
+        return Optional.of(this.visaCardService.deleteVisaCard(id));
     }
 
 }
