@@ -1,4 +1,4 @@
-package com.afonsoqueiros.springbootinduction.visacardsapi.api;
+package com.afonsoqueiros.springbootinduction.visacardsapi.controllers;
 
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.services.VisaCardService;
