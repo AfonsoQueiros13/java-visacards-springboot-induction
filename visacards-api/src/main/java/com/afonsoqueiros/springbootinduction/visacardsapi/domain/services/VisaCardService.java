@@ -3,6 +3,7 @@ package com.afonsoqueiros.springbootinduction.visacardsapi.domain.services;
 import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
+import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.UpdateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.repository.VisaCardRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class VisaCardService {
     public boolean createVisaCard(CreateVisaCard createVisaCard){
 
         VisaCard visaCard = VisaCardMapper.INSTANCE.mapCreateVisaCardToVisaCard(Optional.ofNullable(createVisaCard));
+        this.visaCardRepository.save(visaCard);
+
+        return true;
+    }
+
+    public boolean updateVisaCard(UpdateVisaCard updateVisaCard, Long id){
+
+        Optional<VisaCard> visaCardToUpdate = this.visaCardRepository.findById(id);
+        VisaCard visaCard = VisaCardMapper.INSTANCE.mapUpdateVisaCardToVisaCard(Optional.ofNullable(updateVisaCard),visaCardToUpdate);
+
         this.visaCardRepository.save(visaCard);
 
         return true;

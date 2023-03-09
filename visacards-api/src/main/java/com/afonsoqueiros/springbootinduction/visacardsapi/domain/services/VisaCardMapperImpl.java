@@ -4,6 +4,7 @@ import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.UpdateVisaCard;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -41,6 +42,7 @@ public class VisaCardMapperImpl implements VisaCardMapper {
 
         VisaCard visaCard = new VisaCard();
         visaCard.setCardNumber(createVisaCard.getCardNumber());
+        visaCard.setCvv(createVisaCard.getCvv());
         visaCard.setAddress(createVisaCard.getAddress());
         visaCard.setCreatedDate(LocalDateTime.now());
         visaCard.setExpireDate(createVisaCard.getExpireDate());
@@ -52,8 +54,28 @@ public class VisaCardMapperImpl implements VisaCardMapper {
     }
 
     @Override
-    public VisaCard mapUpdateVisaCardToVisaCard(UpdateVisaCard updateVisaCard) {
-        return null;
+    public VisaCard mapUpdateVisaCardToVisaCard(Optional<UpdateVisaCard> updateVisaCardOptional,Optional<VisaCard> visaCardToUpdateOptional ) {
+
+        UpdateVisaCard updateVisaCard = updateVisaCardOptional.orElse(null);
+        if(updateVisaCard == null)
+            return null;
+
+        VisaCard visaCardToUpdate = visaCardToUpdateOptional.orElse(null);
+        if(visaCardToUpdate == null)
+            return null;
+
+        if(!StringUtils.isEmpty(updateVisaCard.getAddress()))
+            visaCardToUpdate.setAddress(updateVisaCard.getAddress());
+
+        if(!StringUtils.isEmpty(updateVisaCard.getLastName()))
+            visaCardToUpdate.setLastName(updateVisaCard.getLastName());
+
+        if(!StringUtils.isEmpty(updateVisaCard.getPhoneNumber()))
+            visaCardToUpdate.setPhoneNumber(updateVisaCard.getPhoneNumber());
+
+        visaCardToUpdate.setUpdatedDate(LocalDateTime.now());
+        return visaCardToUpdate;
+
     }
 
 }

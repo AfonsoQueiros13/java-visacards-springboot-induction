@@ -1,5 +1,7 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.dtos;
 
+import java.util.Optional;
+
 public class UpdateVisaCard {
     public String address;
     public String lastName;
