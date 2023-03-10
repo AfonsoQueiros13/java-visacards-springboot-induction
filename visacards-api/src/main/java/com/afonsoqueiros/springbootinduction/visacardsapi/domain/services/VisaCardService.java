@@ -23,7 +23,7 @@ public class VisaCardService {
         return VisaCardMapper.INSTANCE.mapVisaCardToGetVisaCard(visaCard);
     }
 
-    public void createVisaCard(CreateVisaCard createVisaCard){
+    public Long createVisaCard(CreateVisaCard createVisaCard){
 
         VisaCard visaCard = VisaCardMapper.INSTANCE.mapCreateVisaCardToVisaCard(Optional.ofNullable(createVisaCard));
         if(visaCard != null){
@@ -32,6 +32,7 @@ public class VisaCardService {
             }
             else{
                 this.visaCardRepository.save(visaCard);
+                return visaCard.getId();
             }
         }
         else {

@@ -9,11 +9,16 @@ import io.micrometer.common.util.StringUtils;
 
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
-
+import java.text.SimpleDateFormat;
 @Component
 public class VisaCardMapperImpl implements VisaCardMapper {
+
+    DateTimeFormatter dft = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     @Override
     public GetVisaCard mapVisaCardToGetVisaCard(Optional<VisaCard> visaCardOptional) {
 
@@ -25,12 +30,12 @@ public class VisaCardMapperImpl implements VisaCardMapper {
         getVisaCard.setId(visaCard.getId());
         getVisaCard.setCardNumber(visaCard.getCardNumber());
         getVisaCard.setAddress(visaCard.getAddress());
-        getVisaCard.setCreatedDate(visaCard.getCreatedDate().toString());
+        getVisaCard.setCreatedDate(visaCard.getCreatedDate().format(dft));
         getVisaCard.setExpireDate(visaCard.getExpireDate());
         getVisaCard.setFirstName(visaCard.getFirstName());
         getVisaCard.setLastName(visaCard.getLastName());
         getVisaCard.setPhoneNumber(visaCard.getPhoneNumber());
-        getVisaCard.setUpdatedDate(visaCard.getUpdateDate().toString());
+        getVisaCard.setUpdatedDate(visaCard.getUpdateDate().format(dft));
         return getVisaCard;
     }
 
@@ -46,12 +51,12 @@ public class VisaCardMapperImpl implements VisaCardMapper {
         visaCard.setCardNumber(createVisaCard.getCardNumber());
         visaCard.setCvv(createVisaCard.getCvv());
         visaCard.setAddress(createVisaCard.getAddress());
-        visaCard.setCreatedDate(LocalDateTime.now());
+        visaCard.setCreatedDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime());
         visaCard.setExpireDate(createVisaCard.getExpireDate());
         visaCard.setFirstName(createVisaCard.getFirstName());
         visaCard.setLastName(createVisaCard.getLastName());
         visaCard.setPhoneNumber(createVisaCard.getPhoneNumber());
-        visaCard.setUpdatedDate(LocalDateTime.now());
+        visaCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime());
         return visaCard;
     }
 
@@ -75,7 +80,7 @@ public class VisaCardMapperImpl implements VisaCardMapper {
         if(!StringUtils.isEmpty(updateVisaCard.getPhoneNumber()))
             visaCardToUpdate.setPhoneNumber(updateVisaCard.getPhoneNumber());
 
-        visaCardToUpdate.setUpdatedDate(LocalDateTime.now());
+        visaCardToUpdate.setUpdatedDate(LocalDateTime.parse(dft.format(LocalDateTime.now())));
         return visaCardToUpdate;
     }
 

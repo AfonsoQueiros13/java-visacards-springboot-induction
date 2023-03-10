@@ -30,9 +30,10 @@ public class VisaCardsController extends HomeController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void createVisaCard(@RequestBody CreateVisaCard createVisaCard){
+    public GetVisaCard createVisaCard(@RequestBody CreateVisaCard createVisaCard){
 
-        this.visaCardService.createVisaCard(createVisaCard);
+        Long id = this.visaCardService.createVisaCard(createVisaCard);
+        return this.visaCardService.findById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
