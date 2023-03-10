@@ -4,7 +4,10 @@ import com.afonsoqueiros.springbootinduction.visacardsapi.domain.services.VisaCa
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.UpdateVisaCard;
+import com.afonsoqueiros.springbootinduction.visacardsapi.exceptions.GlobalExceptions;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -15,26 +18,34 @@ public class VisaCardsController extends HomeController {
     private VisaCardService visaCardService;
 
     @GetMapping(value = "{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Optional<GetVisaCard> getVisaCardInfo(@PathVariable(value = "id") long id){
-        return Optional.ofNullable(this.visaCardService.findById(id));
+        GetVisaCard getVisaCard = this.visaCardService.findById(id);
+        if(getVisaCard != null)
+            return Optional.of(getVisaCard);
+        else {
+            throw new GlobalExceptions.ResourceNotFoundException();
+        }
     }
 
     @PostMapping()
-    public Optional<Boolean> createVisaCard(@RequestBody CreateVisaCard createVisaCard){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createVisaCard(@RequestBody CreateVisaCard createVisaCard){
 
-        return Optional.of(this.visaCardService.createVisaCard(createVisaCard));
+        this.visaCardService.createVisaCard(createVisaCard);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "{id}")
-    public Optional<Boolean> updateVisaCard(@PathVariable(value = "id") long id, @RequestBody UpdateVisaCard updateVisaCard){
+    public void updateVisaCard(@PathVariable(value = "id") long id, @RequestBody UpdateVisaCard updateVisaCard){
 
-        return Optional.of(this.visaCardService.updateVisaCard(updateVisaCard, id));
+        this.visaCardService.updateVisaCard(updateVisaCard, id);
     }
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "{id}")
-    public Optional<Boolean> deleteVisaCard(@PathVariable(value = "id") long id){
+    public void deleteVisaCard(@PathVariable(value = "id") long id){
 
-        return Optional.of(this.visaCardService.deleteVisaCard(id));
+        this.visaCardService.deleteVisaCard(id);
     }
 
 }

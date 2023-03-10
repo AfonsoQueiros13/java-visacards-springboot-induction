@@ -4,7 +4,9 @@ import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.UpdateVisaCard;
+
 import io.micrometer.common.util.StringUtils;
+
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -75,7 +77,6 @@ public class VisaCardMapperImpl implements VisaCardMapper {
 
         visaCardToUpdate.setUpdatedDate(LocalDateTime.now());
         return visaCardToUpdate;
-
     }
 
 }

@@ -1,0 +1,4 @@
+1. ver se as verificações para o update estão fixes  - verificar
+2. adicionar statuscode  - done
+3. adicionar global exception handler no controller global  - done
+4. verificação do numero do cartao (checkar se ja existe na db)  - done

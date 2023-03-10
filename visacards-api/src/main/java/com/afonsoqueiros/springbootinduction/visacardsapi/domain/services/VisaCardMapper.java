@@ -17,4 +17,5 @@ public interface VisaCardMapper {
     GetVisaCard mapVisaCardToGetVisaCard(Optional<VisaCard> visaCard);
     VisaCard mapCreateVisaCardToVisaCard(Optional<CreateVisaCard> visaCard);
     VisaCard mapUpdateVisaCardToVisaCard(Optional<UpdateVisaCard> updateVisaCard, Optional<VisaCard> visaCardToUpdateOptional);
+
 }

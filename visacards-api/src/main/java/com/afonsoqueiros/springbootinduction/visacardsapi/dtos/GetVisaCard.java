@@ -82,4 +82,5 @@ public class GetVisaCard {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
+
 }
