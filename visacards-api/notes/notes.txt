@@ -1,9 +1,5 @@
 TODO
-POST
-Validação de campos não estão bem
-Ao repetir dá-me um 422 mas sem a mensagem clara do porquê
-The credit card cardNumber is already on the databas
-O Create não devolve o objecto (ver SPEC)
-Lombok
-Usar Bean Validator
+
 testes Integração
+falta verificacoes para deletes que nao existem o id
+verificacao para numero de cartao existente, esta a retornar 201 qd os campos sao todos iguais

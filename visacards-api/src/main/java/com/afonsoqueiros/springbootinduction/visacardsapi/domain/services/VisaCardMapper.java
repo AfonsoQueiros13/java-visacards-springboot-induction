@@ -15,7 +15,7 @@ public interface VisaCardMapper {
     VisaCardMapper INSTANCE = Mappers.getMapper( VisaCardMapper.class );
 
     GetVisaCard mapVisaCardToGetVisaCard(Optional<VisaCard> visaCard);
-    VisaCard mapCreateVisaCardToVisaCard(Optional<CreateVisaCard> visaCard);
+    VisaCard mapCreateVisaCardToVisaCard(CreateVisaCard visaCard);
     VisaCard mapUpdateVisaCardToVisaCard(Optional<UpdateVisaCard> updateVisaCard, Optional<VisaCard> visaCardToUpdateOptional);
 
 }

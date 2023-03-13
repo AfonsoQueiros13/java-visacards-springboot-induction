@@ -4,10 +4,10 @@ import com.afonsoqueiros.springbootinduction.visacardsapi.domain.VisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.CreateVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.GetVisaCard;
 import com.afonsoqueiros.springbootinduction.visacardsapi.dtos.UpdateVisaCard;
-import com.afonsoqueiros.springbootinduction.visacardsapi.exceptions.GlobalExceptions;
 import com.afonsoqueiros.springbootinduction.visacardsapi.repository.VisaCardRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -23,43 +23,31 @@ public class VisaCardService {
         return VisaCardMapper.INSTANCE.mapVisaCardToGetVisaCard(visaCard);
     }
 
-    public Long createVisaCard(CreateVisaCard createVisaCard){
+    public GetVisaCard createVisaCard(CreateVisaCard createVisaCard){
 
-        VisaCard visaCard = VisaCardMapper.INSTANCE.mapCreateVisaCardToVisaCard(Optional.ofNullable(createVisaCard));
-        if(visaCard != null){
-            if(this.visaCardRepository.findVisaCardByCardNumber(visaCard.getCardNumber())!= null){
-                throw new GlobalExceptions.ResourceAlreadyOnDBException();
+        VisaCard visaCard = VisaCardMapper.INSTANCE.mapCreateVisaCardToVisaCard(createVisaCard);
+            if(visaCardRepository.findVisaCardByCardNumber(visaCard.getCardNumber()) == null){
+                long id;
+                id = this.visaCardRepository.saveAndFlush(visaCard).getId();
+                return VisaCardMapper.INSTANCE.mapVisaCardToGetVisaCard(this.visaCardRepository.findById(id));
             }
-            else{
-                this.visaCardRepository.save(visaCard);
-                return visaCard.getId();
-            }
-        }
-        else {
-            throw new GlobalExceptions.PayloadInvalidException();
-        }
+        return null;
     }
 
-    public void updateVisaCard(UpdateVisaCard updateVisaCard, Long id){
+    public ResponseEntity<Object> updateVisaCard(UpdateVisaCard updateVisaCard, Long id){
 
         Optional<VisaCard> visaCardToUpdate = this.visaCardRepository.findById(id);
         if(visaCardToUpdate.isPresent()){
             VisaCard visaCard = VisaCardMapper.INSTANCE.mapUpdateVisaCardToVisaCard(Optional.ofNullable(updateVisaCard),visaCardToUpdate);
             this.visaCardRepository.save(visaCard);
         }
-        else{
-            throw new GlobalExceptions.ResourceNotFoundException();
-        }
+        return ResponseEntity.notFound().build();
     }
 
-    public void deleteVisaCard(Long id){
+    public Optional<VisaCard> deleteVisaCard(Long id){
         Optional<VisaCard> visaCardToDelete = this.visaCardRepository.findById(id);
-        if(visaCardToDelete.isPresent()){
-            this.visaCardRepository.deleteById(id);
-        }
-        else{
-            throw new GlobalExceptions.ResourceNotFoundException();
-        }
+        this.visaCardRepository.deleteById(id);
+        return visaCardToDelete;
     }
 
 }

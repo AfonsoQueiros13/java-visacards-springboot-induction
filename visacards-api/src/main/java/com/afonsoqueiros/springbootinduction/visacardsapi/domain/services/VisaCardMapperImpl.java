@@ -40,12 +40,8 @@ public class VisaCardMapperImpl implements VisaCardMapper {
     }
 
     @Override
-    public VisaCard mapCreateVisaCardToVisaCard(Optional<CreateVisaCard> createVisaCardOptional) {
+    public VisaCard mapCreateVisaCardToVisaCard(CreateVisaCard createVisaCard) {
 
-
-        CreateVisaCard createVisaCard = createVisaCardOptional.orElse(null);
-        if(createVisaCard == null)
-            return null;
 
         VisaCard visaCard = new VisaCard();
         visaCard.setCardNumber(createVisaCard.getCardNumber());
@@ -56,7 +52,7 @@ public class VisaCardMapperImpl implements VisaCardMapper {
         visaCard.setFirstName(createVisaCard.getFirstName());
         visaCard.setLastName(createVisaCard.getLastName());
         visaCard.setPhoneNumber(createVisaCard.getPhoneNumber());
-        visaCard.setUpdatedDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime());
+        visaCard.setUpdateDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime());
         return visaCard;
     }
 
@@ -80,7 +76,7 @@ public class VisaCardMapperImpl implements VisaCardMapper {
         if(!StringUtils.isEmpty(updateVisaCard.getPhoneNumber()))
             visaCardToUpdate.setPhoneNumber(updateVisaCard.getPhoneNumber());
 
-        visaCardToUpdate.setUpdatedDate(LocalDateTime.parse(dft.format(LocalDateTime.now())));
+        visaCardToUpdate.setUpdateDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime());
         return visaCardToUpdate;
     }
 
