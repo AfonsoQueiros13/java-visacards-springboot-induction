@@ -1,54 +1,66 @@
-/*
 package com.afonsoqueiros.springbootinduction.visacardsapi.exceptions;
 
-import org.springdoc.api.ErrorMessage;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @ControllerAdvice
 public class GlobalExceptions {
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public static class ResourceNotFoundException extends RuntimeException  {
-        public ResourceNotFoundException(){
-            super();
-            System.out.println("Error 404: Resource not found");
-        }
+
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(
+            MissingServletRequestParameterException ex, HttpHeaders headers,
+            HttpStatus status, WebRequest request) {
+        String error = ex.getParameterName() + " parameter is missing";
+
+        ApiError apiError =
+                new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+        return new ResponseEntity<Object>(
+                apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public static class ResourceAlreadyOnDBException extends RuntimeException {
-        public ResourceAlreadyOnDBException(){
-            super();
-            System.out.println("Error 422: Card number already exists on database");
-        }
+    @ExceptionHandler(ResourceAlreadyAddedException.class)
+    public ResponseEntity<?> resourceAlreadyAddedException(ResourceAlreadyAddedException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public static class PayloadInvalidException extends RuntimeException {
-        public PayloadInvalidException(){
-            super();
-            System.out.println("Error 400: Payload Invalid");
+    @ExceptionHandler({ ConstraintViolationException.class})
+    public ResponseEntity<Object> handleConstraintViolation(
+            ConstraintViolationException ex, WebRequest request) {
+        List<String> errors = new ArrayList<String>();
+        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+            errors.add(violation.getRootBeanClass().getName() + " " +
+                    violation.getPropertyPath() + ": " + violation.getMessage());
         }
+
+        ApiError apiError =
+                new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errors);
+        return new ResponseEntity<Object>(
+                apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ArrayList<String> details = new ArrayList<String>();
-        for(ObjectError error : ex.getBindingResult().getAllErrors()) {
-            details.add(error.getDefaultMessage());
-        }
-        ErrorMessage error = new ErrorMessage(details.toString());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+    public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
+            MethodArgumentTypeMismatchException ex, WebRequest request) {
+        String error =
+                ex.getName() + " should be of type " + ex.getRequiredType().getName();
+
+        ApiError apiError =
+                new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+        return new ResponseEntity<Object>(
+                apiError, new HttpHeaders(), apiError.getStatus());
     }
 }
 
-*/

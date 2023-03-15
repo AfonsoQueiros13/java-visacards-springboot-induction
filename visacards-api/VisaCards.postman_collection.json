@@ -8,9 +8,16 @@
 	"item": [
 		{
 			"name": "GetVisaCard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "localhost:8080/api/v1/learning/visa/electron/1",
 					"host": [
@@ -36,7 +43,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"address\": \"Rua Antonio Sergio n 63 Baguim do Monte\",\r\n  \"cardNumber\": \"4913659656615151\",\r\n  \"cvv\": \"123\",\r\n  \"expireDate\": \"12/2023\",\r\n  \"firstName\": \"Joel\",\r\n  \"lastName\": \"Coelho\",\r\n  \"phoneNumber\": \"+351913287488\"\r\n}",
+					"raw": "{\r\n  \"address\": \"Rua Antonio Sergio n 63 Baguim do Monte\",\r\n  \"cardNumber\": \"1\",\r\n  \"cvv\": \"123\",\r\n  \"expireDate\": \"99/9999\",\r\n  \"firstName\": \"Afon5wso\",\r\n  \"lastName\": \"Queiros\",\r\n  \"phoneNumber\": \"+351913287488\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +75,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"address\": \"Rua da XX\",\r\n  \"lastName\": \"JuJU\",\r\n  \"phoneNumber\": \"+351916969629\"\r\n}",
+					"raw": "{\r\n  \"address\": \"Rua da XXX\",\r\n  \"phoneNumber\": \"+351916969629\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
