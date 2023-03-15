@@ -3,6 +3,7 @@ INSERT INTO VISA_CARD VALUES (
 	'4913659656615151',
 	'Parque Industrial de Taveiro Lote 49, 3045-504',
 	'2018-12-06 12:00:28',
+	'123',
 	'12/2018',
 	'Carlos',
 	'Seabra',

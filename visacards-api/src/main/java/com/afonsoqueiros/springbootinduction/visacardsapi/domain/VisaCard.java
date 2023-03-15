@@ -28,6 +28,7 @@ public class VisaCard {
     @Size(max = 3)
     public String cvv;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     public LocalDateTime createdDate;
 
     @NotNull
@@ -46,6 +47,8 @@ public class VisaCard {
     public String lastName;
     @Size(max = 64)
     public String phoneNumber;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
     public LocalDateTime  updateDate;
 
 }
