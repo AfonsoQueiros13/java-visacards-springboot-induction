@@ -1,5 +1,6 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.dtos;
 
+import com.afonsoqueiros.springbootinduction.visacardsapi.utils.annotations.VisaCardNumber;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import lombok.Setter;
 public class CreateVisaCard {
     public String address;
 
+    @VisaCardNumber
     @NotBlank(message = "Card number cannot be empty")
     @Column(unique=true)
     public String cardNumber;

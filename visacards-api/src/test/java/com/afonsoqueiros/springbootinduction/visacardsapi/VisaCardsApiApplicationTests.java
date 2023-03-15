@@ -48,19 +48,19 @@ class VisaCardsApiApplicationTests {
 		CreateVisaCard createVisaCard = new CreateVisaCard();
 		createVisaCard.setFirstName("Afonso");
 		createVisaCard.setLastName("Queiros");
-		createVisaCard.setCardNumber("4444333377779999");
+		createVisaCard.setCardNumber("4916800450704315");
 		createVisaCard.setExpireDate("03/2024");
 		createVisaCard.setPhoneNumber("+351913277689");
 		createVisaCard.setAddress("Rua da xxx, 59");
 		createVisaCard.setCvv("123");
 		GetVisaCard response = restTemplate.postForObject(baseUrl, createVisaCard, GetVisaCard.class);
 		assertEquals("Afonso", response != null ? response.getFirstName() : null);
-		assertEquals("4444333377779999", response != null ? response.getCardNumber() : null);
+		assertEquals("4916800450704315", response != null ? response.getCardNumber() : null);
 		assertEquals(1, testH2Repository.findAll().size());
 	}
 
 	@Test
-	@Sql(statements = "INSERT INTO VISA_CARD VALUES (1,'4913659656615151', 'Parque Industrial de Taveiro Lote 49', " +
+	@Sql(statements = "INSERT INTO VISA_CARD VALUES (1, 'Parque Industrial de Taveiro Lote 49','4916800450704315', " +
 			"'2018-12-06 12:00:28', '123', '12/2018', 'Carlos', 'Seabra'," +
 			" '+35191916004323','2018-12-06 14:00:28') ;", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "DELETE FROM VISA_CARD WHERE FIRST_NAME = 'Carlos';",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -76,7 +76,7 @@ class VisaCardsApiApplicationTests {
 	}
 
 	@Test
-	@Sql(statements = "INSERT INTO VISA_CARD VALUES (2,'4913659656615152', 'Parque Industrial de Taveiro Lote 49', " +
+	@Sql(statements = "INSERT INTO VISA_CARD VALUES (2, 'Parque Industrial de Taveiro Lote 49','4916800450704315', " +
 			"'2018-12-06 12:00:28', '123', '12/2018', 'Carlos', 'Seabra'," +
 			" '+35191916004323','2018-12-06 14:00:28') ;", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 	@Sql(statements = "DELETE FROM VISA_CARD WHERE Id = 2",executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
@@ -84,10 +84,8 @@ class VisaCardsApiApplicationTests {
 		UpdateVisaCard updateVisaCard = new UpdateVisaCard();
 		updateVisaCard.setLastName("Queiros");
 		updateVisaCard.setPhoneNumber("+351913277689");
-		updateVisaCard.setAddress("Rua da xxx, 59");
-
+		updateVisaCard.setAddress("Rua da xxx 59");
 		long id = 2;
-		VisaCard visaCardfromDb = testH2Repository.findById(id).get();
 
 		restTemplate.put(baseUrl + "2", updateVisaCard);
 
@@ -98,7 +96,7 @@ class VisaCardsApiApplicationTests {
 	}
 
 	@Test
-	@Sql(statements = "INSERT INTO VISA_CARD VALUES (3,'4913659656615151', 'Parque Industrial de Taveiro Lote 49', " +
+	@Sql(statements = "INSERT INTO VISA_CARD VALUES (3, 'Parque Industrial de Taveiro Lote 49','4916800450704315', " +
 			"'2018-12-06 12:00:28', '123', '12/2018', 'Carlos', 'Seabra'," +
 			" '+35191916004323','2018-12-06 14:00:28') ;", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 	public void testDeleteVisaCard() {

@@ -1,8 +1,7 @@
 package com.afonsoqueiros.springbootinduction.visacardsapi.domain;
 
-import com.afonsoqueiros.springbootinduction.visacardsapi.utils.serialization.DateDeSerializer;
+import com.afonsoqueiros.springbootinduction.visacardsapi.utils.annotations.VisaCardNumber;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -20,6 +19,7 @@ import java.time.LocalDateTime;
 public class VisaCard {
     public String address;
 
+    @VisaCardNumber
     @NotBlank(message = "Card number cannot be empty")
     @Column(unique=true)
     public String cardNumber;
