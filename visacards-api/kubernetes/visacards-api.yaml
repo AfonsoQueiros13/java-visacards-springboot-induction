@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: visacards-api
+  labels:
+    app: visacards-api
+spec:
+  type: NodePort
+  selector:
+    app: visacards-api
+  ports:
+    - protocol: TCP
+      port: 8010
+      name: http
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visacards-api
+spec:
+  selector:
+    matchLabels:
+      app: visacards-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: visacards-api
+    spec:
+      containers:
+        - name: shopfront
+          image: afonso13/visacards-api:latest
+          ports:
+            - containerPort: 8010
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8010
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
