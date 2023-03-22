@@ -38,7 +38,7 @@ spec:
               hostPort: 80
           livenessProbe:
             httpGet:
-              path: /healthz
+              path: /
               port: liveness-port
             failureThreshold: 1
             periodSeconds: 60
