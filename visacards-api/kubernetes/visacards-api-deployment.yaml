@@ -19,11 +19,3 @@ spec:
             - name: liveness-port
               containerPort: 8080
               hostPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /
-              port: liveness-port
-            failureThreshold: 1
-            periodSeconds: 60
-            # Override pod-level terminationGracePeriodSeconds #
-            terminationGracePeriodSeconds: 60
