@@ -33,17 +33,14 @@ spec:
         - name: visacards-api
           image: afonso13/visacards-api:latest
           ports:
-            - containerPort: 8010
-      ports:
-        - name: liveness-port
-          containerPort: 8080
-          hostPort: 8080
-
-      livenessProbe:
-        httpGet:
-          path: /healthz
-          port: liveness-port
-        failureThreshold: 1
-        periodSeconds: 60
-        # Override pod-level terminationGracePeriodSeconds #
-        terminationGracePeriodSeconds: 60
+            - name: liveness-port
+              containerPort: 8010
+              hostPort: 8010
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: liveness-port
+            failureThreshold: 1
+            periodSeconds: 60
+            # Override pod-level terminationGracePeriodSeconds #
+            terminationGracePeriodSeconds: 60
