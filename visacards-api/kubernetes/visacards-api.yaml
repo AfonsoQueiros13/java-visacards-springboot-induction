@@ -1,20 +1,3 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: visacards-api
-  labels:
-    app: visacards-api
-spec:
-  type: NodePort
-  selector:
-    app: visacards-api
-  ports:
-    - protocol: TCP
-      port: 80
-      name: http
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,8 +17,8 @@ spec:
           image: afonso13/visacards-api:latest
           ports:
             - name: liveness-port
-              containerPort: 80
-              hostPort: 80
+              containerPort: 8080
+              hostPort: 8080
           livenessProbe:
             httpGet:
               path: /
