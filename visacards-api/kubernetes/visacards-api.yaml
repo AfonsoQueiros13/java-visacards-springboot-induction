@@ -20,7 +20,6 @@ kind: Deployment
 metadata:
   name: visacards-api
 spec:
-  type: NodePort
   selector:
     matchLabels:
       app: visacards-api
